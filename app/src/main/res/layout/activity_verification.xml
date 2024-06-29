@@ -23,23 +23,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="인증번호를 입력해주세요"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextVerificationCode"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <EditText
+        android:id="@+id/editTextPhoneNumberInfo"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:text="전화번호로 인증번호를 보냈어요!"
+        android:textSize="14sp"
+        android:textColor="#808080"
+        android:gravity="start|center_vertical"
+        android:paddingStart="3dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="8dp"
+        android:inputType="none"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"/>
+
 
     <EditText
         android:id="@+id/editTextVerificationCode"
-        android:layout_width="0dp"
+        android:layout_width="280dp"
         android:layout_height="48dp"
         android:hint="6자리 숫자"
+        android:textSize="14sp"
+        android:textColorHint="#808080"
+        android:gravity="start|center_vertical"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumberInfo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintEnd_toStartOf="@+id/textViewTimer"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"/>
+
+
+    <TextView
+        android:id="@+id/textViewTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="4dp"
+        android:text="03:00"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonResend"
+        app:layout_constraintStart_toEndOf="@+id/editTextVerificationCode"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumberInfo" />
+
+    <Button
+        android:id="@+id/buttonResend"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:text="재전송"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions"
+        app:layout_constraintStart_toEndOf="@+id/editTextPhoneNumberInfo"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="13dp"/>
 
     <Button
         android:id="@+id/buttonLogin"
@@ -50,16 +99,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
-
-    <TextView
-        android:id="@+id/textViewTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="03:00"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextVerificationCode"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
