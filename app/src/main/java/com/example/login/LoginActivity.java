@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextPhoneNumber;
     private Button buttonNext;
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         initUI();
 
@@ -24,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
             if (!phoneNumber.isEmpty()) {
                 if (isValidPhoneNumber(phoneNumber)) {
                     // 전화번호를 VerificationActivity로 전달
-                    Intent intent = new Intent(MainActivity.this, VerificationActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, VerificationActivity.class);
                     intent.putExtra("PHONE_NUMBER", phoneNumber);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "유효한 전화번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "유효한 전화번호를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(MainActivity.this, "전화번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "전화번호를 입력해주세요", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -15,7 +15,7 @@ public class VerificationActivity extends AppCompatActivity {
     private Button buttonLogin;
     private Button buttonResend;
     private TextView textViewTimer;
-    private TextView textViewPhoneNumberInfo; // 추가된 부분
+    private TextView textViewPhoneNumberInfo; // 수정: 추가된 부분
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,9 @@ public class VerificationActivity extends AppCompatActivity {
 
         // MainActivity로부터 전달된 전화번호 받기
         String phoneNumber = getIntent().getStringExtra("PHONE_NUMBER");
-        textViewPhoneNumberInfo.setText(phoneNumber + "에 인증번호를 보냈어요!"); // 텍스트 설정
+        if (phoneNumber != null) {
+            textViewPhoneNumberInfo.setText(phoneNumber + "에 인증번호를 보냈어요!"); // 텍스트 설정
+        }
 
         // 로그인 버튼 클릭 이벤트 처리
         buttonLogin.setOnClickListener(v -> {
@@ -35,7 +37,10 @@ public class VerificationActivity extends AppCompatActivity {
                 // 인증번호가 유효한지 확인하는 로직 추가
                 if (isValidVerificationCode(verificationCode)) {
                     Toast.makeText(VerificationActivity.this, "인증 성공!", Toast.LENGTH_SHORT).show();
-                    // 로그인 성공 후 다음 액티비티로 이동하는 로직 추가
+                    // 홈 페이지로 이동
+                    Intent intent = new Intent(VerificationActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish(); // 현재 액티비티 종료
                 } else {
                     Toast.makeText(VerificationActivity.this, "인증번호가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -60,7 +65,7 @@ public class VerificationActivity extends AppCompatActivity {
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonResend = findViewById(R.id.buttonResend);
         textViewTimer = findViewById(R.id.textViewTimer);
-        textViewPhoneNumberInfo = findViewById(R.id.editTextPhoneNumberInfo); // 초기화
+        textViewPhoneNumberInfo = findViewById(R.id.editTextPhoneNumberInfo); // 수정: 초기화
     }
 
     // 타이머 시작 메서드

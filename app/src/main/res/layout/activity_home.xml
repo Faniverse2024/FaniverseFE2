@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <!-- 상단 타이틀 -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faniverse"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- 광고 배너 -->
+    <ImageView
+        android:id="@+id/imageViewAdBanner"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ad_banner"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 동그라미 아이콘들 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_end="20dp"
+        android:orientation="vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="vertical" />
+
+    <ImageView
+        android:id="@+id/imageViewDot1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAdBanner"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_dot"/>
+
+    <ImageView
+        android:id="@+id/imageViewDot2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="35dp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAdBanner"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDot1"
+        android:src="@drawable/ic_dot2"/>
+
+    <ImageView
+        android:id="@+id/imageViewDot3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toEndOf="@+id/imageViewDot2"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAdBanner"
+        android:src="@drawable/ic_dot"/>
+
+    <!-- 카테고리별 상품 -->
+    <TextView
+        android:id="@+id/textViewCategoryProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="카테고리별 상품"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewDot1" />
+
+    <!-- 최근 등록된 상품 -->
+    <TextView
+        android:id="@+id/textViewRecentProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="최근 등록된 상품"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCategoryProducts" />
+
+    <!-- 검색 아이콘 -->
+    <ImageView
+        android:id="@+id/imageViewSearch"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewBell"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_search"/>
+
+    <!-- 벨 아이콘 -->
+    <ImageView
+        android:id="@+id/imageViewBell"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_bell"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <!-- 상품 리스트 1 -->
+    <ImageView
+        android:id="@+id/imageViewProduct1"
+        android:layout_width="112dp"
+        android:layout_height="157dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRecentProducts"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/product_pic"/>
+
+    <!-- 상품 리스트 2 -->
+    <ImageView
+        android:id="@+id/imageViewProduct2"
+        android:layout_width="112dp"
+        android:layout_height="157dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRecentProducts"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProduct1"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 상품 리스트 3 -->
+    <ImageView
+        android:id="@+id/imageViewProduct3"
+        android:layout_width="112dp"
+        android:layout_height="157dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRecentProducts"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProduct2"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 하단 탭 바 -->
+    <LinearLayout
+        android:id="@+id/bottomTabBar"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp">
+
+        <!-- 홈 탭 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:contentDescription="@string/home"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홈"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/inter"/>
+        </LinearLayout>
+
+        <!-- 관심 탭 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_heart"
+                android:contentDescription="@string/interest"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="관심"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/inter"/>
+        </LinearLayout>
+
+        <!-- 커뮤니티 탭 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_community"
+                android:contentDescription="@string/community"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="커뮤니티"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/inter"/>
+        </LinearLayout>
+
+        <!-- 마이페이지 탭 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="@string/profile"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마이페이지"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/inter"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
