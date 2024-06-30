@@ -190,6 +190,12 @@
                         android:layout_marginEnd="8dp"
                         android:background="#D3D3D3" />
 
+                    <View
+                        android:layout_width="130dp"
+                        android:layout_height="160dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="#D3D3D3" />
+
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -244,6 +250,12 @@
                         android:layout_marginEnd="8dp"
                         android:background="#D3D3D3" />
 
+                    <View
+                        android:layout_width="130dp"
+                        android:layout_height="160dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="#D3D3D3" />
+
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
@@ -252,50 +264,110 @@
     <!-- 하단 바 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="8dp"
         android:weightSum="5">
 
-        <TextView
-            android:layout_width="20dp"
+        <!-- 홈 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="홈" />
+            android:orientation="vertical"
+            android:gravity="center">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#D3D3D3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="홈"
+                android:textColor="#000000"
+                android:gravity="center" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 관심 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="관심" />
+            android:orientation="vertical"
+            android:gravity="center">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#D3D3D3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="관심"
+                android:textColor="#000000"
+                android:gravity="center" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 커뮤니티 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="커뮤니티" />
+            android:orientation="vertical"
+            android:gravity="center">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#D3D3D3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="커뮤니티"
+                android:textColor="#000000"
+                android:gravity="center" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 채팅 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="채팅" />
+            android:orientation="vertical"
+            android:gravity="center">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#D3D3D3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="채팅"
+                android:textColor="#000000"
+                android:gravity="center" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 마이페이지 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="마이페이지" />
+            android:orientation="vertical"
+            android:gravity="center">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#D3D3D3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="마이페이지"
+                android:textColor="#000000"
+                android:gravity="center" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
