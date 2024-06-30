@@ -89,10 +89,13 @@
                 android:textColor="#000000"
                 android:paddingStart="8dp" />
 
-            <View
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="#D3D3D3" />
+            <ImageView
+                android:id="@+id/delete_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_delete" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,10 +117,13 @@
                 android:textColor="#000000"
                 android:paddingStart="8dp" />
 
-            <View
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="#D3D3D3" />
+            <ImageView
+                android:id="@+id/delete_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_delete" />
         </LinearLayout>
 
     </LinearLayout>
