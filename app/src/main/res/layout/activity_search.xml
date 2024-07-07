@@ -90,7 +90,7 @@
                 android:paddingStart="8dp" />
 
             <ImageView
-                android:id="@+id/delete_icon"
+                android:id="@+id/delete_icon1"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
@@ -118,7 +118,7 @@
                 android:paddingStart="8dp" />
 
             <ImageView
-                android:id="@+id/delete_icon"
+                android:id="@+id/delete_icon2"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
