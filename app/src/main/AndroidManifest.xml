@@ -36,6 +36,9 @@
             android:name=".ChatHome"
             android:exported="false" />
         <activity
+            android:name=".password"
+            android:exported="false" />
+        <activity
             android:name=".AuctionAttend"
             android:exported="false" />
         <activity

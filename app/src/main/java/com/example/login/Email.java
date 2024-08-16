@@ -24,7 +24,7 @@ public class Email extends AppCompatActivity {
         btn_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Email.this, Certification.class);
+                Intent intent = new Intent(Email.this, password.class);
                 startActivity(intent); // 액티비티 이동
             }
         });
