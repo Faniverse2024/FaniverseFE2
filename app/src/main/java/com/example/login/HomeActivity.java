@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ import java.util.Set;
 public class HomeActivity extends AppCompatActivity {
 
     private ImageView searchIcon;
+    private ImageView detailIcon;
     private LinearLayout homeLayout;
     private LinearLayout interestLayout;
     private LinearLayout chatLayout;
@@ -65,6 +67,23 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // LoginActivity로부터 사용자 이름을 받아옴
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
+
+        // 사용자 이름이 있을 경우 환영 메시지 표시
+        if (userName != null) {
+            Toast.makeText(this, userName + "님 환영합니다", Toast.LENGTH_SHORT).show();
+
+            // 몇 초 후에 메시지를 사라지게 하려면 Handler를 사용
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // 토스트는 자동으로 사라지므로 추가 작업이 필요하지 않음
+                }
+            }, 2000); // 2초 후 사라짐
+        }
 
         // UI 요소 초기화
         initializeUIElements();
@@ -109,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initializeUIElements() {
         searchIcon = findViewById(R.id.search_icon);
+        detailIcon = findViewById(R.id.image_detail);
         homeLayout = findViewById(R.id.home_layout);
         interestLayout = findViewById(R.id.interest_layout);
         chatLayout = findViewById(R.id.chat_layout);
@@ -125,11 +145,21 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        detailIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, DetailPage_buyer.class);
+            startActivity(intent);
+        });
+
         homeLayout.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, HomeActivity.class)));
         interestLayout.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, InterestActivity.class)));
         chatLayout.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, ChatHome.class)));
         communityLayout.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, CommunityActivity.class)));
         mypageLayout.setOnClickListener(view -> startActivity(new Intent(HomeActivity.this, MyPage.class)));
+    }
+
+    private void openDetailPage() {
+        Intent intent = new Intent(HomeActivity.this, DetailPage_buyer.class);
+        startActivity(intent);
     }
 
     private void setupRecyclerView() {
@@ -171,28 +201,22 @@ public class HomeActivity extends AppCompatActivity {
         int popupHeight = popupView.getMeasuredHeight();
 
         // 팝업 위치를 조정하여 + 버튼 바로 위에 나타나도록 설정
-        popupWindow.showAtLocation(anchorView, 0, location[0], location[1] - popupHeight -80);
+        popupWindow.showAtLocation(anchorView, 0, location[0], location[1] - popupHeight - 80);
 
         // 일반 판매 버튼
         Button btnGeneralSales = popupView.findViewById(R.id.btn_general_sales);
-        btnGeneralSales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, GeneralSales.class);
-                startActivity(intent);
-                popupWindow.dismiss(); // 팝업 닫기
-            }
+        btnGeneralSales.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, GeneralSales.class);
+            startActivity(intent);
+            popupWindow.dismiss(); // 팝업 닫기
         });
 
         // 경매 판매 버튼
         Button btnAuctionSales = popupView.findViewById(R.id.btn_auction_sales);
-        btnAuctionSales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AuctionSales.class);
-                startActivity(intent);
-                popupWindow.dismiss(); // 팝업 닫기
-            }
+        btnAuctionSales.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, AuctionSales.class);
+            startActivity(intent);
+            popupWindow.dismiss(); // 팝업 닫기
         });
     }
 }

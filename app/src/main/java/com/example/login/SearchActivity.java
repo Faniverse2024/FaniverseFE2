@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private ImageView backButton, searchButton;
+    private ImageView backButton, searchButton, filterIcon;
     private LinearLayout recentSearchLayout;
     private EditText searchEditText;
     private List<String> recentSearches;
@@ -28,6 +28,7 @@ public class SearchActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.back_button);
         searchButton = findViewById(R.id.search_button);
+        filterIcon = findViewById(R.id.filter_icon); // 필터 아이콘 추가
         recentSearchLayout = findViewById(R.id.recent_search_layout);
         searchEditText = findViewById(R.id.search_edit_text);
 
@@ -56,6 +57,14 @@ public class SearchActivity extends AppCompatActivity {
                     intent.putExtra("QUERY", query);
                     startActivity(intent);
                 }
+            }
+        });
+
+        filterIcon.setOnClickListener(new View.OnClickListener() { // 필터 아이콘 클릭 리스너 추가
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, SearchFilterActivity.class);
+                startActivity(intent);
             }
         });
 

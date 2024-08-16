@@ -46,9 +46,9 @@
                     android:orientation="horizontal">
 
                     <include layout="@layout/item_product"/>
-                    <include layout="@layout/item_product"/>
-                    <include layout="@layout/item_product"/>
-                    <include layout="@layout/item_product"/>
+                    <include layout="@layout/item_product1"/>
+                    <include layout="@layout/item_product2"/>
+                    <include layout="@layout/item_product3"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -63,9 +63,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <include layout="@layout/item_product"/>
-                    <include layout="@layout/item_product"/>
-                    <include layout="@layout/item_product"/>
+                    <include layout="@layout/item_product4"/>
+                    <include layout="@layout/item_product5"/>
+                    <include layout="@layout/item_product6"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -82,21 +82,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전체 11"
+                android:text="전체 3"
                 android:textSize="14sp"
                 android:textColor="#000000"
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
+                android:id="@+id/ll_keywords_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp">
 
+                <!-- 초기 키워드들 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="# 키워드"
+                    android:text="# 에스파"
                     android:textSize="14sp"
                     android:padding="8dp"
                     android:layout_marginEnd="8dp"
@@ -105,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="# 키워드"
+                    android:text="# 두산베어스"
                     android:textSize="14sp"
                     android:padding="8dp"
                     android:layout_marginEnd="8dp"
@@ -114,11 +116,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="# 키워드"
+                    android:text="# 뉴진스"
                     android:textSize="14sp"
                     android:padding="8dp"
                     android:textColor="#000000"/>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -238,4 +241,19 @@
                 android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
+
+    <!-- 플로팅 버튼 -->
+    <Button
+        android:id="@+id/btn_interest_keyword"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#c99ad1"
+        android:text="+"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center" />
 </RelativeLayout>

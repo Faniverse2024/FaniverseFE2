@@ -30,6 +30,9 @@
             android:name=".ChatRoom"
             android:exported="false" />
         <activity
+            android:name=".ChatRoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChatHome"
             android:exported="false" />
         <activity
@@ -54,6 +57,15 @@
             android:name=".DetailPage_buyer"
             android:exported="false" />
         <activity
+            android:name=".DetailPage_buyer1"
+            android:exported="false" />
+        <activity
+            android:name=".KeywordRegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostCreationActivity"
+            android:exported="false" />
+        <activity
             android:name=".GeneralSales"
             android:exported="false" />
         <activity
@@ -75,9 +87,6 @@
             android:name=".Name"
             android:exported="false" />
         <activity
-            android:name=".Birth"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -93,9 +102,6 @@
             android:name=".InterestActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
-            android:exported="false" />
-        <activity
             android:name=".CommunityActivity"
             android:exported="false" />
         <activity
@@ -106,6 +112,9 @@
             android:exported="false" />
         <activity
             android:name=".CommentListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchFilterActivity"
             android:exported="false" />
     </application>
 

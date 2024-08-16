@@ -24,8 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="이메일로 인증번호가 전송되었습니다"
+        android:textColor="#4F4F4F"
         android:textStyle="bold" />
 
     <TextView

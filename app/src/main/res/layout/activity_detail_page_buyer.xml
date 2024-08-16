@@ -16,18 +16,20 @@
             android:id="@+id/product_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="17sp"
-            android:textStyle="bold"
+            android:textSize="20sp"
             android:text="일반 판매"
+            android:layout_marginTop="32dp"
+            android:textStyle="bold"
+            android:textColor="#4F4F4F"
             android:gravity="center_horizontal" />
 
         <ImageView
             android:id="@+id/product_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/grey1" />
+            android:src="@drawable/ic_cat1"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +41,7 @@
                 android:id="@+id/seller_avatar"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:src="@drawable/avatar"
+                android:src="@drawable/ic_user"
                 android:layout_marginEnd="10dp" />
 
             <TextView
@@ -48,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="판매자"
+                android:text="에스파사랑해"
                 android:textSize="14sp" />
 
             <Button
@@ -65,13 +67,23 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/secure_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="안전한 거래를 위해 '노랑 구름'이 사진에 포함되어 있는지 확인하세요"
+            android:textSize="15sp"
+            android:textColor="#4F4F4F"/>
+
+        <TextView
             android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:text="상품명" />
+            android:text="상품명"
+            android:textColor="#4F4F4F"/>
 
         <TextView
             android:id="@+id/product_price"
@@ -79,7 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="가격"
-            android:textSize="14sp" />
+            android:textSize="20sp"
+            android:textColor="#4F4F4F"/>
 
         <TextView
             android:id="@+id/product_description"
@@ -87,21 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="상품 설명"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="일반거래     2주 전"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="상세 정보"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:textColor="#4F4F4F"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,11 +115,12 @@
         <Button
             android:id="@+id/btn_chat"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_corner"
+            android:layout_height="68dp"
             android:text="채팅하기"
+            android:backgroundTint="#c99ad1"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp" />
     </LinearLayout>
 </ScrollView>

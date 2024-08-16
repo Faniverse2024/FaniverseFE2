@@ -24,7 +24,7 @@ public class Name extends AppCompatActivity {
         btn_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Name.this, Birth.class);
+                Intent intent = new Intent(Name.this, Email.class);
                 startActivity(intent); // 액티비티 이동
             }
         });

@@ -141,13 +141,13 @@ public class AfterSearchActivity extends AppCompatActivity {
         productList.clear();
 
         List<Product> allProducts = new ArrayList<>();
-        allProducts.add(new Product("뉴진스 인형", "10000원"));
-        allProducts.add(new Product("에스파 앨범", "20000원"));
-        allProducts.add(new Product("뉴진스 민지 포카", "15000원"));
-        allProducts.add(new Product("방탄 인형", "15000원"));
-        allProducts.add(new Product("방탄소년단 슬로건", "15000원"));
-        allProducts.add(new Product("뉴진스 가방", "15000원"));
-        allProducts.add(new Product("에스파 윈터 포카", "15000원"));
+        allProducts.add(new Product("뉴진스 인형", "10000원", 1));
+        allProducts.add(new Product("에스파 앨범", "20000원", 4));
+        allProducts.add(new Product("뉴진스 민지 포카", "15000원", 2));
+        allProducts.add(new Product("방탄 인형", "15000원", 4));
+        allProducts.add(new Product("방탄소년단 슬로건", "15000원", 4));
+        allProducts.add(new Product("뉴진스 가방", "15000원", 3));
+        allProducts.add(new Product("에스파 윈터 포카", "15000원", 4));
 
         // 검색어에 따라 데이터를 필터링
         for (Product product : allProducts) {

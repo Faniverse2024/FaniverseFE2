@@ -1,18 +1,31 @@
 package com.example.login;
 
-import android.os.Bundle;
+public class ChatRoom {
+    private String id;
+    private String name;
+    private String sellerName;
+    private int imageResId;  // Drawable 리소스 ID
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+    public ChatRoom(String id, String name, String sellerName, int imageResId) {
+        this.id = id;
+        this.name = name;
+        this.sellerName = sellerName;
+        this.imageResId = imageResId;
+    }
 
-public class ChatRoom extends AppCompatActivity {
+    public String getId() {
+        return id;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_room);
+    public String getName() {
+        return name;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public int getImageResId() {
+        return imageResId;
     }
 }

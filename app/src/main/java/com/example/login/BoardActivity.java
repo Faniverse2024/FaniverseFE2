@@ -2,9 +2,13 @@ package com.example.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +22,14 @@ public class BoardActivity extends AppCompatActivity {
     private ImageView backButton;
     private TextView toolbarTitle;
     private String loggedInUserName = "Logged In User"; // 예시: 실제 로그인한 사용자 이름으로 대체해야 함
+    private Button btnWrite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
+
+        btnWrite = findViewById(R.id.btn_write_post);
 
         // Toolbar 제목 설정
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -49,6 +56,9 @@ public class BoardActivity extends AppCompatActivity {
 
         postAdapter = new PostAdapter(this, postList, loggedInUserName);
         recyclerView.setAdapter(postAdapter);
+
+        // 업로드 버튼 클릭 리스너 설정
+        btnWrite.setOnClickListener(view -> showPopup(view));
     }
 
     private List<Post> getPostsByCommunityId(int communityId) {
@@ -60,11 +70,33 @@ public class BoardActivity extends AppCompatActivity {
         // 예제 데이터로 대체:
         long currentTime = System.currentTimeMillis();
         if (communityId == 1) {
-            posts.add(new Post(1, "username", "내용", 21, 4, currentTime - 180000, R.drawable.ic_star));
+            posts.add(new Post(1, "skeiwn23", "뉴진스 공패 개예쁘다.. 팜하니 상의 정보 아는 사람", 21, 4, currentTime - 130000, R.drawable.ic_newjeans));
+            posts.add(new Post(1, "민지플레이션", "아 바이에른뮌헨 인스타 공계에\n<선수들도 놀란 뉴진스 민지의 독수리슛> 제목으로 시축 영상\n따로 올라온 거 개웃기다", 182, 52, currentTime - 180000, R.drawable.ic_newjeans_soccer));
         } else if (communityId == 2) {
-            posts.add(new Post(2, "username", "내용\n내용\n내용", 6, 18, currentTime - 7200000, 0));
+            posts.add(new Post(2, "재민니", "에스파는\n방시혁을\n찢어", 6, 18, currentTime - 720000, 0));
         }
 
         return posts;
+    }
+
+    private void showPopup(View anchorView) {
+        // 팝업 레이아웃을 인플레이트
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_write, null);
+
+        // PopupWindow를 생성하고 설정
+        final PopupWindow popupWindow = new PopupWindow(popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        // 일반 판매 버튼
+        Button btnGeneralSales = popupView.findViewById(R.id.btn_write);
+        btnGeneralSales.setOnClickListener(v -> {
+            Intent intent = new Intent(BoardActivity.this, PostCreationActivity.class);
+            startActivity(intent);
+            popupWindow.dismiss(); // 팝업 닫기
+        });
+
+        popupWindow.showAsDropDown(anchorView, 0, -anchorView.getHeight()-190);
     }
 }

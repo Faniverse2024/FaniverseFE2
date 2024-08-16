@@ -77,7 +77,7 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(CommentActivity.this, "Comment added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show();
                     finish(); // 댓글 작성 후 액티비티 종료
                 } else {
                     Toast.makeText(CommentActivity.this, "Failed to add comment", Toast.LENGTH_SHORT).show();

@@ -40,8 +40,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 무조건 로그인 성공 처리
+                // 로그인 성공 처리
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent.putExtra("userName", "고물이날날이");  // 사용자 이름을 전달
                 startActivity(intent);
                 finish();
             }

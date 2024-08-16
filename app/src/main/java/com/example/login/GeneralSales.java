@@ -56,7 +56,7 @@ public class GeneralSales extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GeneralSales.this, DetailPage_buyer.class);
+                Intent intent = new Intent(GeneralSales.this, DetailPage_buyer1.class);
                 intent.putExtra("title", editTitle.getText().toString());
                 intent.putExtra("category", editCategory.getText().toString());
                 intent.putExtra("price", editPrice.getText().toString());

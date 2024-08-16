@@ -14,10 +14,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:text="마이페이지"
+        android:layout_marginTop="32dp"
         android:textStyle="bold"
-        android:text="프로필"
+        android:textColor="#4F4F4F"
         android:gravity="center_horizontal" />
 
     <LinearLayout
@@ -30,7 +31,7 @@
             android:id="@+id/seller_avatar"
             android:layout_width="60dp"
             android:layout_height="80dp"
-            android:src="@drawable/avatar"
+            android:src="@drawable/ic_user"
             android:layout_marginEnd="10dp" />
 
         <LinearLayout
@@ -44,9 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
-                android:text="닉네임"
+                android:text="고물이날날이"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#4F4F4F"/>
 
             <TextView
                 android:id="@+id/rating_review"
@@ -68,7 +70,8 @@
         android:layout_marginTop="20dp"
         android:text="판매 중인 상품"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#4F4F4F"/>
 
     <!-- 판매 중인 상품 목록은 RecyclerView로 대체 가능 -->
     <TextView
@@ -93,14 +96,15 @@
             android:layout_weight="1"
             android:text="평균 별점"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#4F4F4F"/>
 
         <TextView
             android:id="@+id/averageRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,14 +120,15 @@
             android:layout_weight="1"
             android:text="완료한 거래수"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#4F4F4F"/>
 
         <TextView
             android:id="@+id/completedTransactions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="15"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- 받은 후기 섹션 -->
@@ -134,7 +139,8 @@
         android:layout_marginTop="20dp"
         android:text="받은 후기"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#4F4F4F"/>
 
     <!-- 받은 후기 목록은 RecyclerView로 대체 가능 -->
     <TextView
@@ -143,6 +149,6 @@
         android:layout_height="wrap_content"
         android:text="후기 1: 좋은 거래였습니다!\n후기 2: 만족합니다."
         android:layout_marginTop="5dp"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>

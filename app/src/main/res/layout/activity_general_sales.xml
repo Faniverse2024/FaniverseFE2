@@ -15,11 +15,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="17sp"
-            android:textStyle="bold"
+            android:textSize="20sp"
             android:text="일반 판매"
-            android:gravity="center" />
+            android:layout_marginTop="32dp"
+            android:textStyle="bold"
+            android:textColor="#4F4F4F"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- 사진 선택 버튼과 미리보기 영역을 담은 레이아웃 -->
         <LinearLayout
@@ -31,18 +36,18 @@
             <Button
                 android:id="@+id/btnSelectImage"
                 android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corner"
+                android:backgroundTint="#c99ad1"
                 android:text="사진\n선택"
                 android:textColor="@android:color/white"
-                android:textSize="11sp" />
+                android:textSize="11dp" />
 
             <ImageView
                 android:id="@+id/imagePreview"
                 android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:background="@drawable/border"
@@ -104,6 +109,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:text="도용 방지 키워드"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/secure_id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border"
+            android:textSize="15sp"
+            android:hint="사진 도용 방지를 위해 '빨간 우산'을 수기로 작성해 사진에 포함해주세요." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="상품 설명"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -121,12 +143,13 @@
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_corner"
+            android:layout_height="68dp"
+            android:text="등록하기"
+            android:backgroundTint="#c99ad1"
             android:textColor="#fff"
             android:textSize="20sp"
-            android:text="등록" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 
