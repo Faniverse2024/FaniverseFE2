@@ -1,6 +1,5 @@
 package com.example.login.model
 
-data class LoginResponse(
-    val token: String,
+data class LogoutResponseDto(
     val message: String
 )

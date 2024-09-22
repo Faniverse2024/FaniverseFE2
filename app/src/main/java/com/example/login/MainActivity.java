@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Name.class);
-                startActivity(intent); // Name 액티비티로 이동
+                Intent intent = new Intent(MainActivity.this, Email.class);
+                startActivity(intent); // Email 액티비티로 이동
             }
         });
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent); // Name 액티비티로 이동
+                startActivity(intent); // Login 액티비티로 이동
             }
         });
     }

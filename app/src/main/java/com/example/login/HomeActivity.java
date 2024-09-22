@@ -68,9 +68,14 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // SharedPreferences에서 username 가져오기
+        SharedPreferences sharedPreferences = getSharedPreferences("FaniversePrefs", MODE_PRIVATE);
+        String userName = sharedPreferences.getString("username", null);
+
+        /*
         // LoginActivity로부터 사용자 이름을 받아옴
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("userName");
+        String userName = intent.getStringExtra("userName"); */
 
         // 사용자 이름이 있을 경우 환영 메시지 표시
         if (userName != null) {
