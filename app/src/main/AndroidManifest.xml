@@ -87,9 +87,7 @@
         <activity
             android:name=".NickName"
             android:exported="false" />
-        <activity
-            android:name=".Name"
-            android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
@@ -120,6 +118,9 @@
         <activity
             android:name=".SearchFilterActivity"
             android:exported="false" />
+
+        <activity android:name=".KeywordProductListActivity" />
+
     </application>
 
 </manifest>
