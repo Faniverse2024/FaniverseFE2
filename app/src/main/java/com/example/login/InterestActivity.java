@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +20,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.login.api.ApiService;
 import com.example.login.model.KeywordDto;
-import com.example.login.model.KeywordProductDto;
+import com.example.login.model.WishlistProductDto;
 import com.example.login.network.RetrofitClient;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,8 +52,12 @@ public class InterestActivity extends AppCompatActivity {
         // 사용자 키워드 조회 호출
         fetchUserKeywords();
 
+        // 위시리스트 상품 조회 호출
+        fetchWishlistProducts();
+
         // 브로드캐스트 리시버 등록
         LocalBroadcastManager.getInstance(this).registerReceiver(keywordReceiver, new IntentFilter("KEYWORD_ADDED"));
+
 
 
         btnInterest = findViewById(R.id.btn_interest_keyword);
@@ -111,6 +116,8 @@ public class InterestActivity extends AppCompatActivity {
         btnInterest.setOnClickListener(view -> showPopup(view));
     }
 
+
+    // 키워드~
 
     private void showPopup(View anchorView) {
         // 팝업 레이아웃을 인플레이트
@@ -203,6 +210,132 @@ public class InterestActivity extends AppCompatActivity {
         super.onDestroy(); // 부모 클래스의 onDestroy 호출
     }
 
+
+    // 위시리스트~
+
+    private void fetchWishlistProducts() {
+        ApiService apiService = RetrofitClient.getApiService();
+        Call<List<WishlistProductDto>> call = apiService.getWishlistProducts();
+
+        call.enqueue(new Callback<List<WishlistProductDto>>() {
+            @Override
+            public void onResponse(Call<List<WishlistProductDto>> call, Response<List<WishlistProductDto>> response) {
+                if (response.isSuccessful()) {
+                    List<WishlistProductDto> wishlistProducts = response.body();
+
+                    if (wishlistProducts != null) {
+                        for (WishlistProductDto product : wishlistProducts) {
+                            Log.d("InterestActivity", "fetch 시 wishlistId: " + product.getWishlistId());
+
+                            Log.d("InterestActivity", "userId: " + product.getUserId());
+                            Log.d("InterestActivity", "productId: " + product.getProductId());
+                            Log.d("InterestActivity", "title: " + product.getTitle());
+                            Log.d("InterestActivity", "content: " + product.getContent());
+                            Log.d("InterestActivity", "category: " + product.getCategory());
+                            Log.d("InterestActivity", "imageUrl: " + product.getImageUrl());
+                            Log.d("InterestActivity", "price: " + product.getPrice());
+
+                        }
+                    } else {
+                        Log.d("InterestActivity", "위시리스트 상품이 없습니다.");
+                    }
+                    displayWishlistProducts(wishlistProducts);
+                } else {
+                    Log.e("InterestActivity", "위시리스트 로딩 실패: " + response.code() + " - " + response.message());
+                    Toast.makeText(InterestActivity.this, "위시리스트 로딩 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WishlistProductDto>> call, Throwable t) {
+                Log.e("InterestActivity", "오류 발생: " + t.getMessage());
+                Toast.makeText(InterestActivity.this, "위시리스트 로딩 오류: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void displayWishlistProducts(List<WishlistProductDto> wishlistProducts) {
+        LinearLayout wishlistContainer = findViewById(R.id.wishlist_product_container);
+        wishlistContainer.removeAllViews();
+
+        if (wishlistProducts == null || wishlistProducts.isEmpty()) {
+            // 위시리스트가 비어있을 경우
+            TextView emptyMessage = new TextView(this);
+            emptyMessage.setText("위시리스트에 상품이 없습니다.");
+            emptyMessage.setTextSize(16);
+            emptyMessage.setTextColor(Color.GRAY);
+            wishlistContainer.addView(emptyMessage);
+        } else {
+            for (WishlistProductDto wishlistProduct : wishlistProducts) {
+                View wishlistProductView = getLayoutInflater().inflate(R.layout.item_wishlist_product, wishlistContainer, false);
+
+                // 상품 정보를 레이아웃에 설정
+                ImageView wishlistProductImage = wishlistProductView.findViewById(R.id.wishlist_product_image);
+                TextView wishlistProductTitle = wishlistProductView.findViewById(R.id.wishlist_product_title);
+                TextView wishlistProductPrice = wishlistProductView.findViewById(R.id.wishlist_product_price);
+                Button removeButton = wishlistProductView.findViewById(R.id.remove_button);
+
+                wishlistProductTitle.setText(wishlistProduct.getTitle());
+                wishlistProductPrice.setText(String.format("%,d원", (int) wishlistProduct.getPrice()));
+
+                Log.d("WishlistProduct", "imageUrl: " + wishlistProduct.getImageUrl());
+
+                // GCS imageUrl 사용하여 Glide로 이미지 로드
+                Glide.with(this)
+                        .load(wishlistProduct.getImageUrl())
+                        .placeholder(R.drawable.placeholder) // 로딩 중에 보여줄 이미지 (선택)
+                        .error(R.drawable.error_image) // 오류 발생 시 보여줄 이미지 (선택)
+                        .into(wishlistProductImage);
+
+                removeButton.setOnClickListener(v -> {
+                    long wishlistId = wishlistProduct.getWishlistId(); // wishlistId 가져오기
+                    Log.d("InterestActivity", "삭제 버튼 클릭 시 wishlistId: " + wishlistId);
+                    removeWishlistItem(wishlistId, wishlistProductView);
+                    //Toast.makeText(InterestActivity.this, "위시리스트에서 제거!", Toast.LENGTH_SHORT).show();
+                });
+
+                wishlistContainer.addView(wishlistProductView);
+            }
+        }
+    }
+
+    private void removeWishlistItem(long wishlistId, View wishlistProductView) {
+        Log.d("InterestActivity", "wishlistId: " + wishlistId);
+        Log.d("InterestActivity", "wishlistProductView: " + wishlistProductView);
+        ApiService apiService = RetrofitClient.getApiService();
+        Call<String> call = apiService.removeWishlistItem(wishlistId);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    // 삭제 성공 시 해당 뷰 제거
+                    Log.d("InterestActivity", "삭제 성공: " + response.message());
+                    ((ViewGroup) wishlistProductView.getParent()).removeView(wishlistProductView);
+                    Toast.makeText(InterestActivity.this, "위시리스트에서 삭제!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("InterestActivity", "위시리스트 상품 삭제 실패: " + response.code() + " - " + response.message());
+                    // errorBody 확인
+                    if (response.errorBody() != null) {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            Log.e("InterestActivity", "Error Body: " + errorBody);
+                        } catch (IOException e) {
+                            Log.e("InterestActivity", "Error reading error body: " + e.getMessage());
+                        }
+                    }
+
+                    Toast.makeText(InterestActivity.this, "위시리스트 삭제 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("InterestActivity", "오류 발생: " + t.getMessage());
+                Toast.makeText(InterestActivity.this, "삭제 오류: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }

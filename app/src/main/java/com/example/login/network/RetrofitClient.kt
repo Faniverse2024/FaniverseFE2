@@ -1,12 +1,14 @@
 package com.example.login.network
 
 import com.example.login.api.ApiService
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.CookieJar
 import okhttp3.Cookie
 import okhttp3.HttpUrl
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
@@ -38,10 +40,13 @@ object RetrofitClient {
                     .cookieJar(cookieJar)
                     .build()
 
+                val gson = GsonBuilder().setLenient().create();
+
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
             }
             return retrofit!!

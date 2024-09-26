@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.bumptech.glide.Glide;
+
 
 public class KeywordProductListActivity extends AppCompatActivity {
     private LinearLayout productsContainer;
@@ -86,6 +89,7 @@ public class KeywordProductListActivity extends AppCompatActivity {
                     productLayout.setOrientation(LinearLayout.VERTICAL);
                     productLayout.setPadding(16, 16, 16, 16);
 
+                    // title
                     TextView productTitle = new TextView(this);
                     productTitle.setText(product.getTitle());
                     productTitle.setTextSize(16);
@@ -94,17 +98,30 @@ public class KeywordProductListActivity extends AppCompatActivity {
                     productTitle.setOnClickListener(v -> {
                         // 상품의 id를 상세 페이지로 전달
                         Intent intent = new Intent(KeywordProductListActivity.this, DetailPage_buyer.class);
-                        intent.putExtra("productId", product.getId()); // productId 전달
+                        intent.putExtra("productId", product.getProductId()); // productId 전달
                         startActivity(intent);
                     });
 
                     productLayout.addView(productTitle);
 
+                    // category
                     TextView productCategory = new TextView(this);
                     productCategory.setText(product.getCategory());
                     productCategory.setTextSize(14);
                     productCategory.setTextColor(Color.GRAY);
                     productLayout.addView(productCategory);
+
+                    // image
+                    ImageView productImage = new ImageView(this);
+                    Glide.with(this)
+                            .load(product.getImageUrl())
+                            .into(productImage);
+                    productLayout.addView(productImage);
+
+                    // price
+                    TextView productPrice = new TextView(this);
+                    productPrice.setText(String.format("%,.0f 원", product.getPrice()));
+                    productLayout.addView(productPrice);
 
                     productsContainer.addView(productLayout);
                 }

@@ -9,7 +9,7 @@ import com.example.login.model.RegisterResponseDto
 import com.example.login.model.RegisterRequestDto
 import com.example.login.model.LogoutResponseDto
 import com.example.login.model.Post
-import com.example.login.model.WishlistDto
+import com.example.login.model.WishlistProductDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -39,7 +39,7 @@ interface ApiService {
 
     // 사용자의 wishlist 조회
     @GET("wishlist/user")
-    fun getCurrentUserWishlist(): Call<List<WishlistDto>>
+    fun getWishlistProducts(): Call<List<WishlistProductDto>>
 
     // wishlist 항목 추가
     @POST("wishlist/add")

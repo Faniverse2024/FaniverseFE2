@@ -1,9 +1,13 @@
 package com.example.login.model
 
-data class WishlistDto(
-    val id: Long,
+data class WishlistProductDto(
+    val wishlistId: Long,
+    val userId: Long,
     val productId: Long,
-    val productName: String,
+    val title: String,
+    val content: String,
+    val category: String,
+    val imageUrl: String,
     val price: Double
 )
 
