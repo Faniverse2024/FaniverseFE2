@@ -61,9 +61,6 @@
             android:name=".DetailPage_buyer"
             android:exported="false" />
         <activity
-            android:name=".DetailPage_buyer1"
-            android:exported="false" />
-        <activity
             android:name=".KeywordRegistrationActivity"
             android:exported="false" />
         <activity
