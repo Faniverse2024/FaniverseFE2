@@ -67,15 +67,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/secure_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="안전한 거래를 위해 '노랑 구름'이 사진에 포함되어 있는지 확인하세요"
-            android:textSize="15sp"
-            android:textColor="#4F4F4F"/>
-
-        <TextView
             android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
