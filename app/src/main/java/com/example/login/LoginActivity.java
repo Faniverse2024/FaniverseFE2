@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                             // SharedPreferences에 사용자 정보 저장
                             SharedPreferences sharedPreferences = getSharedPreferences("FaniversePrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
+
                             editor.putLong("userId", response.body().getId());
                             editor.putString("email", response.body().getEmail());
                             editor.putString("username", response.body().getUsername());
@@ -80,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                             // HomeActivity로 이동
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
-                            finish();
 
                         } else {
                             // 로그인 실패
