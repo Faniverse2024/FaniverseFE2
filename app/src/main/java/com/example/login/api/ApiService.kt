@@ -1,18 +1,6 @@
 package com.example.login.api
 
-import com.example.login.model.PostResponse
 import com.example.login.Comment
-import com.example.login.model.KeywordDto
-import com.example.login.model.KeywordProductDto
-import com.example.login.model.LoginRequestDto
-import com.example.login.model.LoginResponseDto
-import com.example.login.model.RegisterResponseDto
-import com.example.login.model.RegisterRequestDto
-import com.example.login.model.LogoutResponseDto
-import com.example.login.model.Post
-import com.example.login.model.ProductDetailsResponse
-import com.example.login.model.ProductListResponse
-import com.example.login.model.WishlistProductDto
 import com.example.login.model.BoardCreateRequest
 import com.example.login.model.BoardResponse
 import com.example.login.model.BoardUpdateForm
@@ -20,10 +8,23 @@ import com.example.login.model.ChatRoomResponse
 import com.example.login.model.CommentCreateRequest
 import com.example.login.model.CommentResponse
 import com.example.login.model.CommentUpdateForm
+import com.example.login.model.KeywordDto
+import com.example.login.model.KeywordProductDto
+import com.example.login.model.LoginRequestDto
+import com.example.login.model.LoginResponseDto
+import com.example.login.model.LogoutResponseDto
 import com.example.login.model.MessageRequest
 import com.example.login.model.MessageResponse
+import com.example.login.model.Post
 import com.example.login.model.PostCreateRequest
+import com.example.login.model.PostResponse
 import com.example.login.model.PostUpdateForm
+import com.example.login.model.ProductDetailsResponse
+import com.example.login.model.ProductListResponse
+import com.example.login.model.ProductListResponseWrapper
+import com.example.login.model.RegisterRequestDto
+import com.example.login.model.RegisterResponseDto
+import com.example.login.model.WishlistProductDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -39,6 +40,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+
 
 interface ApiService {
 
@@ -374,8 +376,9 @@ interface ApiService {
         @Path("postId") postId: Long
     ): Call<Void>
 
-
-
+    //홈 최근 등록된 상품 가져오기
+    @GET("/products/home")
+    fun getRecentProducts(): Call<ProductListResponseWrapper>
 
     // 기존에 있던 코드
     @GET("getPosts")

@@ -59,21 +59,12 @@
                 android:layout_height="wrap_content"
                 android:text="수정하기"
                 android:textSize="12sp"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:background="@android:color/transparent"
                 android:textColor="@android:color/holo_blue_dark"
                 android:layout_gravity="end" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/secure_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="안전한 거래를 위해 '노랑 구름'이 사진에 포함되어 있는지 확인하세요"
-            android:textSize="15sp"
-            android:textColor="#4F4F4F"/>
 
         <TextView
             android:id="@+id/product_name"
@@ -83,6 +74,15 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:text="상품명"
+            android:textColor="#4F4F4F"/>
+
+        <TextView
+            android:id="@+id/product_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="카테고리"
+            android:textSize="20sp"
             android:textColor="#4F4F4F"/>
 
         <TextView
@@ -120,6 +120,7 @@
             android:backgroundTint="#c99ad1"
             android:textColor="#fff"
             android:textSize="20sp"
+            android:visibility="invisible"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp" />
     </LinearLayout>

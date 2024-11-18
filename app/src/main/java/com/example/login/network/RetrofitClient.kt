@@ -38,6 +38,9 @@ object RetrofitClient {
             if (retrofit == null) {
 
                 val client = OkHttpClient.Builder()
+                    //.connectTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
+                    //.readTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
+                    //.writeTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
                     .cookieJar(cookieJar)
                     .build()
 

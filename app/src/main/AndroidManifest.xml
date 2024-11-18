@@ -4,6 +4,7 @@
 
     <!-- 인터넷 접근 권한 추가 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -59,10 +60,7 @@
             android:exported="false" />
         <activity
             android:name=".DetailPage_buyer"
-            android:exported="false" />
-        <activity
-            android:name=".DetailPage_buyer1"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".KeywordRegistrationActivity"
             android:exported="false" />

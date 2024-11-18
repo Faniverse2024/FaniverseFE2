@@ -109,23 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="도용 방지 키워드"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/secure_id"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/border"
-            android:textSize="15sp"
-            android:hint="사진 도용 방지를 위해 '빨간 우산'을 수기로 작성해 사진에 포함해주세요." />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="상품 설명"
             android:textSize="18sp"
             android:textStyle="bold" />
