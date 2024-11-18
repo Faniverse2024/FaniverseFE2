@@ -3,19 +3,34 @@ package com.example.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.login.api.ApiService;
+import com.example.login.model.ProductDetailsResponse;
+import com.example.login.model.ProductListResponse;
+import com.example.login.network.RetrofitClient;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AfterSearchActivity extends AppCompatActivity {
 
@@ -28,6 +43,8 @@ public class AfterSearchActivity extends AppCompatActivity {
     private LinearLayout homeLayout;
     private LinearLayout interestLayout;
     private LinearLayout chatLayout;
+    private TextView noResultsTextView;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +64,31 @@ public class AfterSearchActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(productList);
         recyclerView.setAdapter(productAdapter);
 
-        Intent intent = getIntent();
-        query = intent.getStringExtra("QUERY");
-        searchEditText.setText(query);
+        noResultsTextView = findViewById(R.id.no_results_text_view);
+        noResultsTextView.setVisibility(View.GONE);
 
-        if (!TextUtils.isEmpty(query)) {
-            searchEditText.setText(query);
-            // 검색어에 따라 데이터 로드
-            loadProducts(query);
-        }
+        progressBar = findViewById(R.id.progress_bar);
+
+
+       // Intent로부터 검색어와 정렬 옵션 가져오기
+       String searchWord = getIntent().getStringExtra("searchWord");
+       String sortBy = getIntent().getStringExtra("sortBy");
+
+       Log.d("AfterSearchActivity", "검색어: " + searchWord);
+       Log.d("AfterSearchActivity", "필터: " + sortBy);
+
+       if (searchWord != null) {
+           searchEditText.setText(searchWord); // 검색창에 검색어 유지
+           searchEditText.setSelection(searchEditText.getText().length()); // 커서를 텍스트 끝으로 이동
+       }
+
+       if (sortBy != null) {
+           // 필터가 적용된 경우 필터링된 결과 가져오기
+           filterProducts(searchWord, sortBy);
+       } else {
+           // 필터가 없는 경우 기본 검색 결과 가져오기
+           searchProducts(searchWord);
+       }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +101,28 @@ public class AfterSearchActivity extends AppCompatActivity {
         filterIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 필터 아이콘 클릭 시 동작 구현
+                String searchWord = searchEditText.getText().toString();
+
+                if (!TextUtils.isEmpty(searchWord)) {
+                    Intent intent = new Intent(AfterSearchActivity.this, SearchFilterActivity.class);
+                    intent.putExtra("searchWord", searchWord); // 검색어를 intent에 추가
+                    startActivity(intent);
+                    //filterProducts(searchWord, sortBy);
+                } else {
+                    Toast.makeText(AfterSearchActivity.this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchProducts();
+                String searchWord = searchEditText.getText().toString();
+                if (!TextUtils.isEmpty(searchWord)) {
+                    searchProducts(searchWord);
+                } else {
+                    Toast.makeText(AfterSearchActivity.this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -84,12 +131,19 @@ public class AfterSearchActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
                         event != null && event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    searchProducts();
+                    String searchWord = searchEditText.getText().toString().trim();
+                    if (!TextUtils.isEmpty(searchWord)) {
+                        searchProducts(searchWord);
+                    } else {
+                        Toast.makeText(AfterSearchActivity.this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 }
                 return false;
             }
         });
+
+
         // 홈 레이아웃 클릭 이벤트 설정
         homeLayout = findViewById(R.id.home_layout);
         homeLayout.setOnClickListener(new View.OnClickListener() {
@@ -121,40 +175,97 @@ public class AfterSearchActivity extends AppCompatActivity {
         });
     }
 
-    private void searchProducts() {
-        String newQuery = searchEditText.getText().toString();
-        if (!TextUtils.isEmpty(newQuery)) {
-            query = newQuery;
-            loadProducts(query);
 
-            // 키보드 숨기기
-            View view = this.getCurrentFocus();
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    // 검색 결과 조회
+    private void searchProducts(String searchWord) {
+        Call<List<ProductDetailsResponse>> call = RetrofitClient.getApiService().searchProducts(searchWord, "latest");
+        progressBar.setVisibility(View.VISIBLE);
+        call.enqueue(new Callback<List<ProductDetailsResponse>>() {
+            @Override
+            public void onResponse(Call<List<ProductDetailsResponse>> call, Response<List<ProductDetailsResponse>> response) {
+                progressBar.setVisibility(View.GONE);
+                if (response.isSuccessful() && response.body() != null) {
+                    productList.clear();
+                    if (response.body().isEmpty()) {
+                        noResultsTextView.setVisibility(View.VISIBLE);
+                        noResultsTextView.setText("'" + searchWord + "' 포함한 검색 결과가 없습니다.");
+                    } else {
+                        noResultsTextView.setVisibility(View.GONE);
+                        for (ProductDetailsResponse productDetailsResponse : response.body()) {
+                            // Product 객체로 변환 후 추가
+                            productList.add(new Product(
+                                    productDetailsResponse.getTitle(),
+                                    productDetailsResponse.getCategory(),
+                                    productDetailsResponse.getPrice(),
+                                    productDetailsResponse.getImageUrl()
+                            ));
+                        }
+                    }
+                    productAdapter.notifyDataSetChanged();
+                } else {
+                    Log.e("AfterSearchActivity", "검색 결과 불러오기 실패. 응답 코드: " + response.code());
+                    Toast.makeText(AfterSearchActivity.this, "검색 결과를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Call<List<ProductDetailsResponse>> call, Throwable t) {
+                Log.e("AfterSearchActivity", "오류 발생: " + t.getMessage(), t);
+                Toast.makeText(AfterSearchActivity.this, "오류 발생: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
-    private void loadProducts(String query) {
-        // 실제 앱에서는 서버 또는 데이터베이스에서 검색어에 따라 데이터를 가져옵니다.
-        productList.clear();
+    // 정렬된 검색 결과 조회
+    private void filterProducts(String searchWord, String sortBy) {
+        Call<List<ProductDetailsResponse>> call = RetrofitClient.getApiService().filterProducts(searchWord, sortBy);
+        progressBar.setVisibility(View.VISIBLE);
+        call.enqueue(new Callback<List<ProductDetailsResponse>>() {
+            @Override
+            public void onResponse(Call<List<ProductDetailsResponse>> call, Response<List<ProductDetailsResponse>> response) {
+                progressBar.setVisibility(View.GONE);
+                if (response.isSuccessful() && response.body() != null) {
+                    productList.clear();
+                    if (response.body().isEmpty()) {
+                        noResultsTextView.setVisibility(View.VISIBLE);
+                        noResultsTextView.setText("'" + searchWord + "' 포함한 검색 결과가 없습니다.");
+                    } else {
+                        noResultsTextView.setVisibility(View.GONE);
+                        for (ProductDetailsResponse productDetailsResponse : response.body()) {
+                            // Product 객체로 변환 후 추가
+                            productList.add(new Product(
+                                    productDetailsResponse.getTitle(),
+                                    productDetailsResponse.getCategory(),
+                                    productDetailsResponse.getPrice(),
+                                    productDetailsResponse.getImageUrl()
+                            ));
+                        }
 
-        List<Product> allProducts = new ArrayList<>();
-        allProducts.add(new Product("뉴진스 인형", "10000원", 1));
-        allProducts.add(new Product("에스파 앨범", "20000원", 4));
-        allProducts.add(new Product("뉴진스 민지 포카", "15000원", 2));
-        allProducts.add(new Product("방탄 인형", "15000원", 4));
-        allProducts.add(new Product("방탄소년단 슬로건", "15000원", 4));
-        allProducts.add(new Product("뉴진스 가방", "15000원", 3));
-        allProducts.add(new Product("에스파 윈터 포카", "15000원", 4));
+                    }
+                    productAdapter.notifyDataSetChanged();
 
-        // 검색어에 따라 데이터를 필터링
-        for (Product product : allProducts) {
-            if (product.getName().contains(query)) {
-                productList.add(product);
+                } else {
+                    try {
+                        Log.e("AfterSearchActivity", String.format("정렬된 검색 결과 불러오기 실패. 응답 코드: %d, 오류 내용: %s",
+                                response.code(), response.errorBody().string()));
+                        Toast.makeText(AfterSearchActivity.this, "검색 결과를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+
+                    } catch (IOException e) {
+                        Log.e("AfterSearchActivity", "오류 내용을 가져오는 중 예외 발생", e);
+                    }
+
+                }
             }
-        }
-        productAdapter.notifyDataSetChanged();
+
+            @Override
+            public void onFailure(Call<List<ProductDetailsResponse>> call, Throwable t) {
+                // 네트워크 오류 또는 예외 발생 시 처리
+                Log.e("AfterSearchActivity", "오류 발생: " + t.getMessage(), t);
+                Toast.makeText(AfterSearchActivity.this, "오류 발생: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }

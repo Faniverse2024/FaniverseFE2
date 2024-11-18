@@ -49,20 +49,12 @@
         android:padding="16dp"
         android:background="?android:attr/selectableItemBackground"/>
 
-    <TextView
-        android:id="@+id/most_popular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="찜 많은 순"
-        android:textSize="14sp"
-        android:padding="16dp"
-        android:background="?android:attr/selectableItemBackground"/>
-
-    <TextView
-        android:id="@+id/close_filter"
+    <Button
+        android:id="@+id/filter_close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="닫기"
+        android:gravity="center"
         android:textSize="14sp"
         android:padding="16dp" />
 </LinearLayout>

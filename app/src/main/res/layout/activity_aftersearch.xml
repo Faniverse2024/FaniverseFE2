@@ -58,15 +58,38 @@
             android:contentDescription="filter button" />
     </RelativeLayout>
 
-    <!-- 검색 결과 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <!-- 검색 결과 및 중앙 배치 요소 -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="5dp"
-        android:padding="3dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- 검색 결과 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarSize="5dp"
+            android:padding="3dp" />
+
+        <!-- 중앙에 표시될 ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- 결과가 없을 때 표시할 텍스트 뷰 -->
+        <TextView
+            android:id="@+id/no_results_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색 결과가 없습니다."
+            android:visibility="gone"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <!-- 하단 바 -->
     <LinearLayout
@@ -182,84 +205,4 @@
                 android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
-
-    <!-- 필터 배경 -->
-    <RelativeLayout
-        android:id="@+id/filter_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:id="@+id/filter_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/white"
-            android:padding="16dp"
-            android:layout_alignParentBottom="true"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="검색 필터"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_gravity="center"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
-
-            <TextView
-                android:id="@+id/high_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="높은 가격 순"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <TextView
-                android:id="@+id/low_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="낮은 가격 순"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <TextView
-                android:id="@+id/latest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="최신 순"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <TextView
-                android:id="@+id/most_popular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="찜 많은 순"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <TextView
-                android:id="@+id/close_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="닫기"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground"/>
-        </LinearLayout>
-    </RelativeLayout>
 </LinearLayout>
